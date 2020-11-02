@@ -106,8 +106,6 @@ document.querySelector('#button-create').addEventListener('click',function (e){
 })
 
 //sets the socket connection
-
-
 socket.on('message', function(msg){
     $('#messages').append($('<li>').text(msg));
 })

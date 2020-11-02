@@ -1,5 +1,9 @@
 
+let room;
 
+function setRoom(r){
+    room = r;
+}
 
 
 
@@ -16,10 +20,13 @@ function init(http){
         })
 
         socket.on('message', (msg) => {
-            console.log('msg2: ' + msg);
-            nsp.emit('message' , msg);
+            console.log('room: ' + room);
+            nsp.in(room).emit('message', msg);
         })
 
+        socket.on('logged-in', (user)=>{
+            nsp.emit('useradd', user)
+        })
     });
 
 }
@@ -45,7 +52,7 @@ function init(http){
 
 
 
-module.exports = {init}
+module.exports = {init,setRoom}
 
 
 

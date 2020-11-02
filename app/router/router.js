@@ -4,7 +4,7 @@ The controller is the logical related to interaction and
 real controller elements are the 'router', so we create a
 router folder
 ====================================================== */
-
+const socket = require('./socket')
 const db = require('../config/connection');
 const orm = require('../models/orm');
 let username = 'admin';
@@ -34,7 +34,6 @@ function router(app) {
 
     app.post('/api/send', async(req,res)=> {
         console.log('post recieved: ', req.body.message)
-        //socket.socket(username,room)
         let result = await orm.getRoomId(room)
         result = JSON.parse(JSON.stringify(result))[0].id?JSON.parse(JSON.stringify(result))[0].id:null;
         result = await orm.insertMsg(result,username,req.body.message)
@@ -56,6 +55,7 @@ function router(app) {
 
     app.post('/api/choose', async(req,res)=>{
         room = req.body.room
+        socket.setRoom(room)
         console.log('room chosen: ', room);
         res.send({message:'room choosen'});
     })
