@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 
 
 const express = require('express');
-const apiRouter = require('./app/router/router.js');
+const apiRouter = require('./app/router/router.js').router;
 const app = express();
 const http = require('http').createServer(app);
 
@@ -20,7 +20,9 @@ app.use(bodyParser.json())
 app.use( express.static('public') );
 
 
-socket(http)
+socket.sendHttp(http)
+
+
 
 apiRouter(app)
 
