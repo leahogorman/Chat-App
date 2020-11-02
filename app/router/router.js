@@ -7,17 +7,8 @@ router folder
 
 const db = require('../config/connection');
 const orm = require('../models/orm');
-const socket = require('./socket')
 let username = 'admin';
 let room = 'default';
-
-function returnRoom(){
-    return room;
-}
-
-function returnUser(){
-    return username;
-}
 
 
 function router(app) {
@@ -43,10 +34,9 @@ function router(app) {
 
     app.post('/api/send', async(req,res)=> {
         console.log('post recieved: ', req.body.message)
-        //const result = await orm.insertMsg(username,req.body.message,room)
-        //console.log(result)
+        //socket.socket(username,room)
         let result = await orm.getRoomId(room)
-        result = JSON.parse(JSON.stringify(result))[0].id
+        result = JSON.parse(JSON.stringify(result))[0].id?JSON.parse(JSON.stringify(result))[0].id:null;
         result = await orm.insertMsg(result,username,req.body.message)
         res.send(result)
     });
@@ -66,9 +56,8 @@ function router(app) {
 
     app.post('/api/choose', async(req,res)=>{
         room = req.body.room
-        console.log('room chosen: ', room)
+        console.log('room chosen: ', room);
         res.send({message:'room choosen'});
-        socket.socket();
     })
 
     app.post('/signup', async (req,res)=>{
@@ -84,4 +73,4 @@ function router(app) {
 
 }
 
-module.exports = {router,returnUser,returnRoom}
+module.exports = {router}

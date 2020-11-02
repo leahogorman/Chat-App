@@ -5,7 +5,7 @@ $('#chatroom').hide()
 
 
 
-let username = '/'
+let username = '/default-user'
 var socket = io(username);
 //function for sending POST requests
 function postUrl( url, data={} ){
@@ -60,15 +60,15 @@ async function chat() {
 
 //triggers when user chooses a room
 async function chooseroom(roomname){
-    socket = io('/' + username);
+    //socket = io('/' + username);
+    // setConnection();
     const result = await postUrl('/api/choose',{room : roomname})
     console.log( result)
     $('#room').hide()
     $('#loginform').hide();
     $('#chatroom').show()
-    console.log('client side nsp: ', '/' + username)
-//    chat()
-    setConnection();
+    socket.emit('room', roomname);
+    ;
 }
 
 //generic error function -needs to be modified
@@ -106,21 +106,19 @@ document.querySelector('#button-create').addEventListener('click',function (e){
 })
 
 //sets the socket connection
-function setConnection(){
-    socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
-    });
-}
 
 
-//when send is click the message is sen to the server and the database
-$('form').submit(async function(e) {
+socket.on('message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+})
+//when send is click the message is sen to the server and
+document.querySelector('#send').addEventListener('click', (async function(e) {
 
     e.preventDefault();
-    socket.emit('chat message', $('#m').val());
+    socket.emit('message', $('#m').val());
     let message = $('#m').val()
 
-    // console.log(result2);
+
     $.ajax('/api/send', {
         type: 'POST',
         data: {message}
@@ -133,4 +131,4 @@ $('form').submit(async function(e) {
     $('#m').val('');
 
     return false;
-});
+}));
