@@ -32,11 +32,19 @@ function router(app) {
         res.send(result)
     })
 
-    app.post('/api/register',registerUser.register);
-    app.post('/api/authenticate',authenticateUser.authenticate);
-
-    app.post('/users/register-users', registerUser.register);
-    app.post('/users/authenticate-users', authenticateUser.authenticate);
+    app.post('/api/users/register', async (req,res)=>{
+        const registerResult = await registerUser.register( req.body )
+        console.log( '.. got the result: registerResult', registerResult )
+        res.send( registerResult )
+    });
+    app.post('/api/users/authenticate', async (req,res)=>{
+        const username = req.body.user
+        const password = req.body.password
+        console.log( `[/api/users/authenticate] username(${username}) password(${password})` )
+        const loginResult = await authenticateUser.authenticate( username,password )
+        console.log( '.. attempted to login the user: ', loginResult )
+        res.send( loginResult )
+    });
 
 }
 

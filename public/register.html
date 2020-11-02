@@ -9,16 +9,28 @@
 	<body>
 		<div class="register">
             <h1>Register</h1>
-            <form action="/users/register-users" method="POST">  
-			<input type="text" name="name" placeholder="FIRST NAME">  
-            <input type="text" name="user" placeholder="USERNAME">
-            <input type="password" name="password" placeholder="PASSWORD">
-                   
-            <a href="home.html"> <input type="submit" value="Submit">  </a>
+            <form>  
+                <input type="text" id='name' name="name" placeholder="FIRST NAME">  
+                <input type="text" id='user' name="user" placeholder="USERNAME">
+                <input type="password" id='password' name="password" placeholder="PASSWORD">
                 
-        	<div id="link"><a href="login.html">CLICK HERE to SIGN IN</a></div>
-                </form>
-		</div>
+                <input type="checkbox" onclick="checkPassword()"> Show Password
+                <button onClick="registerUser(event)" value="Submit">Register</button>
+                    
+                <div id="link"><a href="/login.html">CLICK HERE to SIGN IN</a></div>
+            </form>
+
+        </div>
+        <div id="message" style="margin-left: 30px;">
+            <p>Password must contain the following:</p>
+            <p>A lowercase letter</p>
+            <p>An uppercase character</p>
+            <p>A number</p>
+            <p>Minimum length of 8 characters</p>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src='assets/script.js'></script>        
 	</body>
 </html>
 <style>
