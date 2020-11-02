@@ -13,10 +13,9 @@
                 <input type="text" id='user' name="user" placeholder="USERNAME">
                 <input type="password" id='password' name="password" placeholder="PASSWORD">
                     
-                <button onClick='loginUser(event)'>Submit</button>
+                <button id="button" onClick='loginUser(event)'>Submit</button>
             </form>
-                
-            <div id="link"></div><a id="link" href="register.html">CLICK HERE to REGISTER</a></div>
+            <div id="link"><a href="register.html">CLICK HERE to REGISTER</a></div>
 		</div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src='assets/script.js'></script>
@@ -65,6 +64,16 @@
     opacity: 1;
 }
 .login input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: black;
+    border: 1px solid lime;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: lime;
+}
+#button {
     width: 100%;
     padding: 15px;
     background-color: black;

@@ -11,22 +11,20 @@
             <h1>Register</h1>
             <form>  
                 <input type="text" id='name' name="name" placeholder="FIRST NAME">  
-                <input type="text" id='user' name="user" placeholder="USERNAME">
+                <input type="text" id='user' name="user" placeholder="USERNAME" onclick="click()">
+                <div class="password">
+                <p id="message">password must include at least 1 lowercase, 1 uppercase, and a number</p>
                 <input type="password" id='password' name="password" placeholder="PASSWORD">
-                
-                <input type="checkbox" onclick="checkPassword()"> Show Password
-                <button onClick="registerUser(event)" value="Submit">Register</button>
+                </div>
+                <div class="show">
+                    <input type="checkbox" onclick="checkPassword()"> Show Password
+                </div>
+                <br>
+                <button id="button" onClick="registerUser(event)" value="Submit">Register</button>
                     
-                <div id="link"><a href="/login.html">CLICK HERE to SIGN IN</a></div>
+                <div id="link"><a href="login.html">CLICK HERE to SIGN IN</a></div>
             </form>
 
-        </div>
-        <div id="message" style="margin-left: 30px;">
-            <p>Password must contain the following:</p>
-            <p>A lowercase letter</p>
-            <p>An uppercase character</p>
-            <p>A number</p>
-            <p>Minimum length of 8 characters</p>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -75,7 +73,22 @@
     color: lime;
     opacity: 1;
 }
-.register input[type="submit"] {
+.password p {
+    margin-top: 0;
+    display: hidden;
+    text-shadow: none;
+    color: darkgreen;
+}
+.password p:hover {
+    display: block;
+    margin-top: 0;
+    color: lime;
+}
+.show {
+    text-align: center;
+    color: lime;
+}
+#button {
     width: 100%;
     padding: 15px;
     background-color: black;

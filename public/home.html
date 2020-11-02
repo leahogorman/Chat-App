@@ -27,13 +27,14 @@
                 <i class="far fa-comments fa-5x"></i>
                 <p class="chatroomName">Chatroom</p>
                 </a></div>
+                <div class="chat" id="add">
+                    <a href="addroom.html">
+                        <i class="fas fa-plus fa-3x"></i>
+                        <p class="chatroomName">Add a Chatroom</p>
+                    </a>    
+                </div>
             </div>
-            <div class="chat" id="add">
-                <a href="addroom.html">
-                    <i class="fas fa-plus fa-3x"></i>
-                    <p class="chatroomName">Add a Chatroom</p>
-                </a>    
-            </div>
+    
         
 		</div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -88,6 +89,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     color: lime;
+    overflow: scroll;
 }
 .chat {
     margin: 10px;
@@ -101,13 +103,6 @@
 }
 .chatroomName{
     color: lime;
-}
-#add {
-    position: absolute;
-    bottom: 5%;
-      left: 50%;
-      -ms-transform: translate(-5%, -5%);
-      transform: translate(-50%, -50%);
 }
 ::-webkit-scrollbar {
   width: 5px;
