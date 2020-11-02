@@ -6,6 +6,8 @@ router folder
 ====================================================== */
 
 const orm = require('../models/orm');
+const authenticateUser=require('../users/authenticate-users');
+const registerUser=require('../users/register-users');
 
 function router(app) {
     app.get('/saved',async (req, res) => {
@@ -29,6 +31,12 @@ function router(app) {
         console.log(result)
         res.send(result)
     })
+
+    app.post('/api/register',registerUser.register);
+    app.post('/api/authenticate',authenticateUser.authenticate);
+
+    app.post('/users/register-users', registerUser.register);
+    app.post('/users/authenticate-users', authenticateUser.authenticate);
 
 }
 

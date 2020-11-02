@@ -6,14 +6,26 @@
 //     }
 //     return fetch( url,postData ).then( res=>res.json() )
 // }
-
+async function loginUser( event ){
+    event.preventDefault()
+    const result = await $.ajax({ url: '/api/authenticate', method: 'post' })
+    if( result.status ){
+        // login ok, so now save
+        localStorage.userID = result.userID
+        // anything else like redirect
+        location.href = '/chat.html'
+    } else {
+        // nvalid login
+        alert( result.message )
+    }
+}
 
 $(async function () {
     const list = await fetch( '/saved').then( r=>r.json() )
 
     list.forEach(el=>{
         $('#messages').append($('<li>').text(el.message));
-        console.log(el); 
+        console.log(el);
     })
 
     const result = await fetch('/api/data')
