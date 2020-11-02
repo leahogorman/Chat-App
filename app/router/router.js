@@ -8,9 +8,16 @@ router folder
 const db = require('../config/connection');
 const orm = require('../models/orm');
 const socket = require('./socket')
-let username = '/';
+let username = 'admin';
 let room = 'default';
 
+function returnRoom(){
+    return room;
+}
+
+function returnUser(){
+    return username;
+}
 
 
 function router(app) {
@@ -38,7 +45,6 @@ function router(app) {
         console.log('post recieved: ', req.body.message)
         //const result = await orm.insertMsg(username,req.body.message,room)
         //console.log(result)
-        console.log(room)
         let result = await orm.getRoomId(room)
         result = JSON.parse(JSON.stringify(result))[0].id
         result = await orm.insertMsg(result,username,req.body.message)
@@ -49,7 +55,7 @@ function router(app) {
         username = req.body.login;
         const password = req.body.pass;
         const result = await orm.passwordMatch(username,password);
-        console.log(result.length===0?false:true)
+        console.log('logged in as: ', username)
         res.send(result.length!==0);
     });
 
@@ -78,4 +84,4 @@ function router(app) {
 
 }
 
-module.exports = {router, returnName, returnRoom }
+module.exports = {router,returnUser,returnRoom}

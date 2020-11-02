@@ -1,3 +1,6 @@
+let router = require('./router')
+
+
 
 let http;
 function sendHttp(x){
@@ -5,12 +8,14 @@ function sendHttp(x){
 }
 
 function socket() {
-    let user = '/' + require('./router').username
-    let room = require('./router').room
+    let user = '/' +router.returnUser
+    let room = router.returnRoom
     const io = require('socket.io')(http);
     let nsp = io.of(user);
     console.log('socket function is running')
-    //custom namespace for rooms
+    console.log('server nsp: ', user)
+    console.log('server room: ', room )
+    //custom namespace for rooms 
     nsp.on('connection', socket => {
         console.log(user,' connected');
         socket.join(room);

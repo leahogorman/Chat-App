@@ -4,10 +4,10 @@ $('#chatroom').hide()
 
 
 
-//room and login requests
+
 let username = '/'
 var socket = io(username);
-
+//function for sending POST requests
 function postUrl( url, data={} ){
     const postData = {
         headers: { 'Content-Type': 'application/json' },
@@ -18,13 +18,14 @@ function postUrl( url, data={} ){
 }
 
 
-
+//Triggers when user creates room
 async function createroom(room){
     const result = await postUrl('/api/create',{Room : room})
     console.log('room created: ', result)
     result?showroom():error();
 }
 
+//shows a list of rooms;
 async function showroom(){
     $('#login-form').hide();
     $('#room').show()
@@ -57,7 +58,7 @@ async function chat() {
     // console.log('result: ',result)
 }
 
-
+//triggers when user chooses a room
 async function chooseroom(roomname){
     socket = io('/' + username);
     const result = await postUrl('/api/choose',{room : roomname})
@@ -65,14 +66,16 @@ async function chooseroom(roomname){
     $('#room').hide()
     $('#loginform').hide();
     $('#chatroom').show()
-    
+    console.log('client side nsp: ', '/' + username)
 //    chat()
     setConnection();
 }
 
+//generic error function -needs to be modified
 function error(){
     alert('invalid info')
 }
+
 
 async function login(user,password){
     const result = await postUrl('/login',{login: user, pass: password});
@@ -90,7 +93,7 @@ document.querySelector('#signup').addEventListener('click',function(e){
     e.preventDefault();
     signup(document.querySelector('#user').value,document.querySelector('#pass').value)
 })
-
+//#submit is the kogin button
 document.querySelector('#submit').addEventListener('click',function(e){
     e.preventDefault();
     login(document.querySelector('#user').value,document.querySelector('#pass').value)
@@ -102,7 +105,7 @@ document.querySelector('#button-create').addEventListener('click',function (e){
     createroom(val)
 })
 
-
+//sets the socket connection
 function setConnection(){
     socket.on('chat message', function(msg){
         $('#messages').append($('<li>').text(msg));
@@ -110,7 +113,7 @@ function setConnection(){
 }
 
 
-//sending message
+//when send is click the message is sen to the server and the database
 $('form').submit(async function(e) {
 
     e.preventDefault();
