@@ -15,12 +15,14 @@ function init(http){
         console.log('connection established')
         socket.on('room', (msg) => {
             socket.join(msg)
-            console.log('msg1: ' + msg);
+            console.log('[socket] room joined: ' + msg);
+            console.log(socket.room)
             nsp.emit('room joined: ' , msg);
         })
 
         socket.on('message', (msg) => {
-            console.log('room: ' + room);
+            console.log('[socket] msg: ' + msg);
+            console.log(socket.rooms)
             nsp.emit('message', msg);
         })
 

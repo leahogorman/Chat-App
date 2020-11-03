@@ -21,7 +21,7 @@
     padding: 30px;
     border: solid black 5px;
 
-    overflow: scroll;
+    overflow: hidden;
 }
 .options h1  {
     
@@ -46,7 +46,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     color: lime;
-    overflow: scroll;
+    overflow: hidden;
 }
 .chat {
     margin: 10px;
