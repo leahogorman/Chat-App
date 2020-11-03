@@ -2,15 +2,9 @@ $('#login-form').show()
 $('#room').hide()
 $('#chatroom').hide()
 
-
-async function initChatRoom(){
-    const list = await fetch( '/saved').then( r=>r.json() )
-
-
-
 let username = '/default-user'
 var socket = io(username);
-//function for sending POST requests
+
 function postUrl( url, data={} ){
     const postData = {
         headers: { 'Content-Type': 'application/json' },
@@ -20,6 +14,12 @@ function postUrl( url, data={} ){
     return fetch( url,postData ).then( res=>res.json() )
 }
 
+
+async function initChatRoom(){
+    const list = await fetch( '/saved').then( r=>r.json() )
+
+    //function for sending POST requests
+}
 
 //Triggers when user creates room
 async function createroom(room){
@@ -71,18 +71,22 @@ async function chooseroom(roomname){
     // setConnection();
     const result = await postUrl('/api/choose',{room : roomname})
     console.log( result)
-    $('#room').hide()
-    $('#loginform').hide();
+    // $('#room').hide()
+    // $('#loginform').hide();
     $('#chatroom').show()
     socket.emit('room', roomname);
-    ;
+
 }
 
 //generic error function -needs to be modified
 function error(){
     alert('invalid info')
 }
-
+document.querySelector('#create-room').addEventListener('click',function(e){
+    e.preventDefault;
+    const val = e.target.value;
+    chooseroom(val);
+})
 
 async function login(user,password){
     const result = await postUrl('/login',{login: user, pass: password});
@@ -96,34 +100,37 @@ async function signup(user,password){
     result? login(user,password):error()
 }
 
-document.querySelector('#signup').addEventListener('click',function(e){
-    e.preventDefault();
-    signup(document.querySelector('#user').value,document.querySelector('#pass').value)
-})
-//#submit is the kogin button
-document.querySelector('#submit').addEventListener('click',function(e){
-    e.preventDefault();
-    login(document.querySelector('#user').value,document.querySelector('#pass').value)
-})
-
-document.querySelector('#button-create').addEventListener('click',function (e){
-    e.preventDefault();
-    const val = document.querySelector('#create-room').value
-    createroom(val)
-})
-
 //sets the socket connection
 socket.on('message', function(msg){
     $('#messages').append($('<li>').text(msg));
 })
 //when send is click the message is sen to the server and
-document.querySelector('#send').addEventListener('click', (async function(e) {
+// document.querySelector('#send').addEventListener('click', (async function(e) {
 
+//     e.preventDefault();
+//     socket.emit('message', $('#m').val());
+//     let message = $('#m').val()
+
+
+//     $.ajax('/api/send', {
+//         type: 'POST',
+//         data: {message}
+//     }).then(
+//         function() {
+//             console.log('messsage sent');
+//         }
+//     );
+
+//     $('#m').val('');
+// }))
+
+socket = io('/my-namespace');
+$('form').submit(async function(e) {
     e.preventDefault();
-    socket.emit('message', $('#m').val());
+    socket.emit('chat message', $('#m').val());
     let message = $('#m').val()
-
-
+    // const result2 = await postUrl('/api/send',$('#m').val())
+    // console.log(result2);
     $.ajax('/api/send', {
         type: 'POST',
         data: {message}
@@ -135,35 +142,12 @@ document.querySelector('#send').addEventListener('click', (async function(e) {
 
     $('#m').val('');
 
+    return false;
+});
+socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+});
 
-    const result = await fetch('/api/data')
-        .then(r=>r.json())
-    console.log('result: ',result)
-
-    var socket = io('/my-namespace');
-    $('form').submit(async function(e) {
-        e.preventDefault();
-        socket.emit('chat message', $('#m').val());
-        let message = $('#m').val()
-        // const result2 = await postUrl('/api/send',$('#m').val())
-        // console.log(result2);
-        $.ajax('/api/send', {
-            type: 'POST',
-            data: {message}
-        }).then(
-            function() {
-                console.log('messsage sent');
-            }
-        );
-
-        $('#m').val('');
-
-        return false;
-    });
-    socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
-    });
-}
 
 $(function () {
     let url = window.location.href
@@ -175,7 +159,7 @@ $(function () {
         // no authentication needed for these pages
     } else {
         if( !localStorage.userID ){
-            location.href = '/login.html'
+            location.href = '/index.html'
         }
     }
 
@@ -183,5 +167,4 @@ $(function () {
     if( url==='/chatroom' ){
         initChatRoom()
     }
-});
-
+})

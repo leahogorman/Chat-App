@@ -5,16 +5,6 @@
 
 const db = require( '../config/connection.js' )
 
-//error handling function -needs callback
-function insertone(table, cols, vals, cb) {
-    console.log('colums are', cols , 'values are', vals)
-    connection.query('INSERT INTO ?? (??) VALUES (?)' ,[table, cols, vals], function(err, result){
-        if (err){
-            throw err;
-        }
-        cb(result);
-    });
-}
 
 
 // function getList( criteria={} ){

@@ -39,8 +39,13 @@ function router(app) {
     app.post('/api/send', async(req,res)=> {
         console.log('post recieved: ', req.body.message)
         let result = await orm.getRoomId(room)
-        result = JSON.parse(JSON.stringify(result))[0].id?JSON.parse(JSON.stringify(result))[0].id:null;
-        result = await orm.insertMsg(result,username,req.body.message)
+        if(result[0] !== undefined){
+            result = JSON.parse(JSON.stringify(result))[0].id?JSON.parse(JSON.stringify(result))[0].id:null;
+            result = await orm.insertMsg(result,username,req.body.message)
+        } else {
+            result=null;
+        }
+        console.log(result)
         res.send(result)
     });
 

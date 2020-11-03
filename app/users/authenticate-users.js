@@ -1,5 +1,5 @@
-var Cryptr = require('cryptr');
-cryptr = new Cryptr('myTotalySecretKey');
+//var Cryptr = require('cryptr');
+//cryptr = new Cryptr('myTotalySecretKey');
 
 var db = require('../config/connection');
 module.exports.authenticate=async function(user,password){
@@ -12,8 +12,8 @@ module.exports.authenticate=async function(user,password){
 
     // FIXME
     //decryptedString = cryptr.decrypt(results[0].password);
-    const decryptedString = userData.password
-    if(password===decryptedString){
+    //const decryptedString = userData.password
+    if(password===userData.password){
         return {
             status: true,
             userID: userData.username

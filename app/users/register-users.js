@@ -1,4 +1,4 @@
-const Cryptr = require('cryptr');
+//const Cryptr = require('cryptr');
 const db = require('../config/connection');
 // cryptr = new Cryptr('myTotalySecretKey');
 
@@ -7,11 +7,11 @@ module.exports.register=async function( userData ){
     // FIXME
     // var encryptedString = Cryptr.encrypt(req.body.password);
     console.log( '[module: register] req.body: ', userData )
-    var encryptedString = userData.password;
+    //var encryptedString = userData.password;
     var users={
         'first_name':userData.name,
         'username':userData.user,
-        'password':encryptedString
+        'password':userData.password
     }
     const result = await db.query('INSERT INTO USERS SET ?',users)
     console.log( 'db write: ', result )
