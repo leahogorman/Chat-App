@@ -1,0 +1,78 @@
+body {
+    background-image: radial-gradient( circle at top left, darkgreen, black );
+    position: relative;
+    height: 100vh;
+    text-shadow: 0 0 2px limegreen;
+}
+.register {
+    margin: 0;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      -ms-transform: translate(-45%, -45%);
+      transform: translate(-50%, -50%);
+    width: 300px;
+    margin: 0 auto;
+    font-family: 'Inconsolata', monospace;
+    padding: 30px;
+    border: solid black 5px;
+}
+.register h1  {
+    text-align: center;
+    color: lime;
+    font-size: 24px;
+    padding: 0 0 20px 0;
+}
+.register input[type="password"],
+.register input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid lime;
+    margin-bottom: 15px;
+    box-sizing:border-box;
+    background-color: black;
+    color: lime;
+    caret-color: lime;
+}
+.register ::placeholder,
+.register ::placeholder {
+    color: lime;
+    opacity: 1;
+}
+.password p {
+    margin-top: 0;
+    display: hidden;
+    text-shadow: none;
+    color: darkgreen;
+}
+.password p:hover {
+    display: block;
+    margin-top: 0;
+    color: lime;
+}
+.show {
+    text-align: center;
+    color: lime;
+}
+#button {
+    width: 100%;
+    padding: 15px;
+    background-color: black;
+    border: 1px solid lime;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: lime;
+}
+.register #link {
+    text-align: center;
+    margin-top: 30px;
+}
+.register #link a {
+    color:lime;
+}
+::selection {
+    background-color: lime;
+    color: black;
+    text-shadow: none;
+  }

@@ -1,0 +1,85 @@
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  }
+  body {
+  background-image: radial-gradient( circle at top left, darkgreen, black );
+  position: relative;
+  height: 100vh;
+  text-shadow: 0 0 2px limegreen;
+}
+  .chat {
+  margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -ms-transform: translate(-45%, -45%);
+    transform: translate(-50%, -50%);
+  width: 60%;
+  height: 70%;
+  margin: 0 auto;
+  font-family: 'Inconsolata', monospace;
+  padding: 30px;
+  border: solid black 5px;
+}
+.chat h1  {
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  color: lime;
+  font-size: 24px;
+}
+form { 
+  background: #000; 
+  padding: 3px; 
+  position: absolute; 
+  bottom: 0; 
+  right: 5px;
+  width: 100%;
+  }
+form input { 
+  background-color: black;
+  color: lime;
+  caret-color: lime;
+  border: 0; 
+  padding: 10px; 
+  width: 90%; 
+  margin-right: 0.5%; 
+  }
+form button { 
+  position: absolute;
+  width: 100px; 
+  background: lime; 
+  border: none; 
+  padding: 10px; 
+  right: 0;
+  }
+#messages { 
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0; 
+  }
+#messages li { 
+  padding: 5px 10px; 
+  }
+#messages li:nth-child(odd) { 
+  background: #eee; 
+  }
+@media only screen and (max-width: 800px){
+  .chatroom {
+      position: relative;
+      grid-template-columns: 1fr 1fr;
+  }
+  }
+@media only screen and (max-width: 600px){
+  .chatroom {
+      position: relative;
+      grid-template-columns: 1fr;
+  }
+  }
+
+
