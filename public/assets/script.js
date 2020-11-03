@@ -3,6 +3,9 @@ $('#room').hide()
 $('#chatroom').hide()
 
 
+async function initChatRoom(){
+    const list = await fetch( '/saved').then( r=>r.json() )
+
 
 
 let username = '/default-user'
@@ -34,6 +37,9 @@ async function showroom(){
     list = JSON.parse(list);
     document.querySelector('#roomlist').innerHTML = '';
     list.forEach(el=>{
+
+        $('#messages').append($('<li>').text(el.message));
+        console.log(el);
         let g = document.createElement('button')
         g.innerHTML = el.roomname
         g.addEventListener('click',function(e){
@@ -42,6 +48,7 @@ async function showroom(){
             chooseroom(el.roomname)
         })
         document.querySelector('#roomlist').append(g)
+
     })
 }
 
@@ -128,5 +135,53 @@ document.querySelector('#send').addEventListener('click', (async function(e) {
 
     $('#m').val('');
 
-    return false;
-}));
+
+    const result = await fetch('/api/data')
+        .then(r=>r.json())
+    console.log('result: ',result)
+
+    var socket = io('/my-namespace');
+    $('form').submit(async function(e) {
+        e.preventDefault();
+        socket.emit('chat message', $('#m').val());
+        let message = $('#m').val()
+        // const result2 = await postUrl('/api/send',$('#m').val())
+        // console.log(result2);
+        $.ajax('/api/send', {
+            type: 'POST',
+            data: {message}
+        }).then(
+            function() {
+                console.log('messsage sent');
+            }
+        );
+
+        $('#m').val('');
+
+        return false;
+    });
+    socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text(msg));
+    });
+}
+
+$(function () {
+    let url = window.location.href
+    url = url.substr(url.lastIndexOf('/')).replace('.html','')
+    console.log( `.. initialing room: ${url}` )
+
+    // verify user is logged in
+    if( url==='/login' || url==='/register' ){
+        // no authentication needed for these pages
+    } else {
+        if( !localStorage.userID ){
+            location.href = '/login.html'
+        }
+    }
+
+    // load any init code for respective rooms here
+    if( url==='/chatroom' ){
+        initChatRoom()
+    }
+});
+
