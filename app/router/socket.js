@@ -20,10 +20,10 @@ function init(http){
             nsp.emit('room joined: ' , msg);
         })
 
-        socket.on('message', (msg) => {
-            console.log('[socket] msg: ' + msg);
+        socket.on('message', (chatData) => {
+            console.log('[socket] msg: ' + chatData);
             console.log(socket.rooms)
-            nsp.emit('message', msg);
+            nsp.emit('message', chatData);
         })
 
         socket.on('logged-in', (user)=>{

@@ -108,8 +108,9 @@ async function signup(user,password){
 }
 
 //sets the socket connection
-socket.on('message', function(msg){
-    $('#messages').append($('<li>').text(localStorage.getItem('userID') + ': ' + msg));
+socket.on('message', function(chatData){
+    const data = JSON.parse(chatData)
+    $('#messages').append($('<li>').text(data.name + ': ' + data.msg));
 })
 //when send is click the message is sen to the server and
 // document.querySelector('#send').addEventListener('click', (async function(e) {
@@ -132,8 +133,9 @@ socket.on('message', function(msg){
 // }))
 
 $('form').submit(async function(e) {
+    const socketData = JSON.stringify( { name: localStorage.userID, msg: $('#m').val() } )
     e.preventDefault();
-    socket.emit('message', $('#m').val());
+    socket.emit('message', socketData);
     let message = $('#m').val()
     // const result2 = await postUrl('/api/send',$('#m').val())
     // console.log(result2);
