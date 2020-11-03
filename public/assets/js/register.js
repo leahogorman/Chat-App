@@ -78,6 +78,6 @@ async function registerUser( event ){
 
     // successfully registere the user
     alert( result.message )
-    window.location.href = '/login.html'
+    window.location.href = '/index.html'
 }
 

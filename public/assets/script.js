@@ -109,7 +109,7 @@ async function signup(user,password){
 
 //sets the socket connection
 socket.on('message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+    $('#messages').append($('<li>').text(localStorage.getItem('userID') + ': ' + msg));
 })
 //when send is click the message is sen to the server and
 // document.querySelector('#send').addEventListener('click', (async function(e) {
