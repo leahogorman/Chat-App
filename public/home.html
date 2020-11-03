@@ -5,7 +5,7 @@
 		<title>Login Form Tutorial</title>
 		<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="assets/css/home.css">
 	</head>
 	<body>
 		<div class="options">
@@ -41,99 +41,3 @@
         <script src='assets/script.js'></script>
     </body>
 </html>
-<style>
-	body {
-    background-image: radial-gradient( circle at top left, darkgreen, black );
-    position: relative;
-    height: 100vh;
-    text-shadow: 0 0 2px limegreen;
-}
-.options {
-    display: grid;
-    grid-template-rows: 100px 1fr;
-    margin: 0;
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      -ms-transform: translate(-45%, -45%);
-      transform: translate(-50%, -50%);
-    width: 60%;
-    height: 70%;
-    margin: 0 auto;
-    font-family: 'Inconsolata', monospace;
-    padding: 30px;
-    border: solid black 5px;
-
-    overflow: scroll;
-}
-.options h1  {
-    
-    padding: 10px;
-    color: lime;
-    font-size: 24px;
-    margin-left: 10%;
-}
-::selection {
-    background-color: lime;
-    color: black;
-    text-shadow: none;
-  }
-.chatroom {
-    position: absolute;
-    top: 45%;
-      left: 50%;
-      -ms-transform: translate(-45%, -45%);
-      transform: translate(-50%, -50%);
-    width: 90%;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    color: lime;
-    overflow: scroll;
-}
-.chat {
-    margin: 10px;
-    text-align: center;
-}
-.chat i{
-    color: lime;
-    }
-.chat a{
-    text-decoration: none;
-}
-.chatroomName{
-    color: lime;
-}
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: none;
-}
-::-webkit-scrollbar-track-piece{
-    background: none;
-}
-
-::-webkit-scrollbar-thumb {
-    background: none;
-}
-::-webkit-scrollbar-corner {
-    background: none;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: lime;
-}
-
-@media only screen and (max-width: 800px){
-    .chatroom {
-        position: relative;
-        grid-template-columns: 1fr 1fr;
-    }
-    }
-@media only screen and (max-width: 600px){
-    .chatroom {
-        position: relative;
-        grid-template-columns: 1fr;
-    }
-    }
-</style>
