@@ -30,7 +30,7 @@ apiRouter(app)
 
 
 
-http.listen(3000, () => {
+http.listen(PORT, () => {
     console.log('SERVER LISTENING ON *:3000');
 });
 
