@@ -1,14 +1,14 @@
 require( 'dotenv' ).config() // looks for .env ; process.env gets it's values
-const socket = require('./app/router/socket.js');
+
 const bodyParser = require('body-parser')
 
 
 const express = require('express');
-const apiRouter = require('./app/router/router.js');
+const apiRouter = require('./app/router/router.js').router;
 const app = express();
 const http = require('http').createServer(app);
-
-
+const socket = require('./app/router/socket.js');
+socket.init(http)
 const PORT = process.env.PORT || 3000
 
 // for parsing incoming POST data
@@ -20,10 +20,11 @@ app.use(bodyParser.json())
 app.use( express.static('public') );
 
 
-socket(http)
+
+
+
 
 apiRouter(app)
-
 
 
 
