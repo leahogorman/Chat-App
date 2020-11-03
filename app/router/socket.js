@@ -21,7 +21,7 @@ function init(http){
 
         socket.on('message', (msg) => {
             console.log('room: ' + room);
-            nsp.in(room).emit('message', msg);
+            nsp.emit('message', msg);
         })
 
         socket.on('logged-in', (user)=>{
@@ -30,26 +30,6 @@ function init(http){
     });
 
 }
-// function socket(user,room) {
-//     const io = require('socket.io')(http);
-//     let nsp = io.of('/HEllo');
-//     console.log('socket function is running')
-//     console.log('server nsp: ', user)
-//     console.log('server room: ', room )
-
-//     nsp.on('connection', socket => {
-//         console.log(user,' connected');
-//         socket.join('epstein');
-//         console.log(room, ' joined');
-//         socket.on('chat message', (msg,id) => {
-//             nsp.emit('chat message', msg);
-//         })
-//     });
-
-
-// }
-
-
 
 
 module.exports = {init,setRoom}

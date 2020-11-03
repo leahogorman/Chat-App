@@ -25,31 +25,31 @@ async function initChatRoom(){
 async function createroom(room){
     const result = await postUrl('/api/create',{Room : room})
     console.log('room created: ', result)
-    result?showroom():error();
+    //result?showroom():error();
 }
 
 //shows a list of rooms;
 async function showroom(){
-    $('#login-form').hide();
-    $('#room').show()
 
     let list = await fetch ('/api/rooms').then(r=>r.text());
     list = JSON.parse(list);
-    document.querySelector('#roomlist').innerHTML = '';
-    list.forEach(el=>{
+    if (list !== null){
+        list.forEach(el=>{
+            console.log(el);
+            let g = document.createElement('div')
+            g.innerHTML = `<div class="chat" id="3"><a href="#">
+            <i class="far fa-comments fa-5x"></i>
+            <p class="chatroomName">Chatroom</p>
+            </a></div>`
+            g.addEventListener('click',function(e){
+                console.log(el.roomname)
+                chooseroom(el.roomname)
+                window.location = 'chatroom.html'
+            })
+            $('.chatroom').append(g)
 
-        $('#messages').append($('<li>').text(el.message));
-        console.log(el);
-        let g = document.createElement('button')
-        g.innerHTML = el.roomname
-        g.addEventListener('click',function(e){
-            e.preventDefault();
-            console.log(el.roomname)
-            chooseroom(el.roomname)
         })
-        document.querySelector('#roomlist').append(g)
-
-    })
+    }
 }
 
 async function chat() {
@@ -70,7 +70,7 @@ async function chooseroom(roomname){
     //socket = io('/' + username);
     // setConnection();
     const result = await postUrl('/api/choose',{room : roomname})
-    console.log( result)
+    console.log( roomname)
     // $('#room').hide()
     // $('#loginform').hide();
     $('#chatroom').show()
@@ -82,11 +82,18 @@ async function chooseroom(roomname){
 function error(){
     alert('invalid info')
 }
-document.querySelector('#create-room').addEventListener('click',function(e){
-    e.preventDefault;
-    const val = e.target.value;
-    chooseroom(val);
+
+//$('#create').text('gods plan')
+$('#create').on('click',async function(){
+    const val = $("#roominput").text;
+    console.log(val)
+    await createroom(val);
+    window.location = 'home.html'
 })
+// document.querySelector('#create').addEventListener('click',function(){
+//     const val = e.target.value;
+//     chooseroom(val);
+// })
 
 async function login(user,password){
     const result = await postUrl('/login',{login: user, pass: password});
@@ -124,10 +131,9 @@ socket.on('message', function(msg){
 //     $('#m').val('');
 // }))
 
-socket = io('/my-namespace');
 $('form').submit(async function(e) {
     e.preventDefault();
-    socket.emit('chat message', $('#m').val());
+    socket.emit('message', $('#m').val());
     let message = $('#m').val()
     // const result2 = await postUrl('/api/send',$('#m').val())
     // console.log(result2);
@@ -144,9 +150,7 @@ $('form').submit(async function(e) {
 
     return false;
 });
-socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
-});
+
 
 
 $(function () {

@@ -18,15 +18,12 @@ let room = 'default';
 function router(app) {
     app.get('/saved',async (req, res) => {
         const result = await orm.getMsg()
-        //console.log(result)
         res.send(result)
     });
 
     app.get('/api/data', async (req, res) => {
         const result = await orm.getData()
-        //console.log(result)
         res.send(result)
-        // res.sendFile(__dirname + '/index.html')
     });
 
     //needs some changes
@@ -40,7 +37,7 @@ function router(app) {
         console.log('post recieved: ', req.body.message)
         let result = await orm.getRoomId(room)
         if(result[0] !== undefined){
-            result = JSON.parse(JSON.stringify(result))[0].id?JSON.parse(JSON.stringify(result))[0].id:null;
+            result = JSON.parse(JSON.stringify(result))[0].id;
             result = await orm.insertMsg(result,username,req.body.message)
         } else {
             result=null;
