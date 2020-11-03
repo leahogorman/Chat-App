@@ -66,16 +66,16 @@ function router(app) {
         res.send({message:'room choosen'});
     })
 
-    app.post('/signup', async (req,res)=>{
-        const regex = /^((?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/gm
-        const user = req.body.login;
-        const password = req.body.pass;
-        console.log('login info: ', user, password)
-        const result = regex.test(password)? await orm.signUp(user,password): false;
-        console.log(regex.test(user))
-        res.send(result)
+    // app.post('/signup', async (req,res)=>{
+    //     const regex = /^((?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/gm
+    //     const user = req.body.login;
+    //     const password = req.body.pass;
+    //     console.log('login info: ', user, password)
+    //     const result = regex.test(password)? await orm.signUp(user,password): false;
+    //     console.log(regex.test(user))
+    //     res.send(result)
 
-    })
+    // })
 
     app.post('/api/users/register', async (req,res)=>{
         const registerResult = await registerUser.register( req.body )

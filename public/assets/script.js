@@ -85,7 +85,7 @@ function error(){
 
 //$('#create').text('gods plan')
 $('#create').on('click',async function(){
-    const val = $("#roominput").text;
+    const val =document.querySelector("#roominput").value;
     console.log(val)
     await createroom(val);
     window.location = 'home.html'
