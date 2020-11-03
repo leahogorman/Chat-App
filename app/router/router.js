@@ -7,10 +7,6 @@ router folder
 const socket = require('./socket')
 const db = require('../config/connection');
 const orm = require('../models/orm');
-
-const authenticateUser=require('../users/authenticate-users');
-const registerUser=require('../users/register-users');
-
 let username = 'admin';
 let room = 'default';
 
@@ -74,20 +70,6 @@ function router(app) {
         res.send(result)
 
     })
-
-    app.post('/api/users/register', async (req,res)=>{
-        const registerResult = await registerUser.register( req.body )
-        console.log( '.. got the result: registerResult', registerResult )
-        res.send( registerResult )
-    });
-    app.post('/api/users/authenticate', async (req,res)=>{
-        const username = req.body.user
-        const password = req.body.password
-        console.log( `[/api/users/authenticate] username(${username}) password(${password})` )
-        const loginResult = await authenticateUser.authenticate( username,password )
-        console.log( '.. attempted to login the user: ', loginResult )
-        res.send( loginResult )
-    });
 
 }
 

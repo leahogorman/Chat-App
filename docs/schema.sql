@@ -4,16 +4,9 @@ USE CHAT_DATA;
 
 DROP TABLE if exists USERS;
 CREATE TABLE USERS(
-
-    username VARCHAR (35) NOT NULL UNIQUE PRIMARY KEY,
-    first_name VARCHAR(50),
-    `password` VARCHAR(64),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP
-
-    
+    `username` VARCHAR (35) NOT NULL UNIQUE PRIMARY KEY DEFAULT "John",
+    `password` VARCHAR (35) NOT NULL UNIQUE DEFAULT "Doe",
     `online` BOOLEAN DEFAULT 0     
-
 );
 
 DROP TABLE if exists ROOM;
@@ -34,4 +27,3 @@ CREATE TABLE chatlogs(
     FOREIGN KEY (id) REFERENCES ROOM(id)
     ON DELETE CASCADE
 );
-
