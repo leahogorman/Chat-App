@@ -40,7 +40,7 @@ You can install express, mysql, and body-parser via the terminal or gitbash
 NO CLUE!
 
 ## **DEMO**
-![video](https://drive.google.com/file/d/1A95aZWh2tCSKExeHcIjiwxZkWDtDSDuS/view?usp=sharing "Demo")
+[![video](https://drive.google.com/file/d/1FIug2nM8aTTeV4YdmbpNRrkL0X_12Uo7/view?usp=sharing)](https://drive.google.com/file/d/1A95aZWh2tCSKExeHcIjiwxZkWDtDSDuS/view?usp=sharing "Demo")
 
 ## **Contributors**
 This project was done by:
