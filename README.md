@@ -21,7 +21,7 @@ For this Project we built a chat app. We included a registration page, a login p
 Registration:
 For the registration section of our app we created a database table that included the users first name, username, password, created-at, and updated-at. The information that    the user logs into the site become an object that is then connected into the database.
 The password includes security meassures and must be at least 8 characters, with upper case and lower case letters, and must include at least one number.
-![Drag Racing](/docs/img/Login.jpg)
+![Drag Racing](Login.jpg)
 Login:
 For login the information that the user logged in registration is pulled when the user tries to log in. The username and password are checked against the database and if they are not in the database they are asked to create an account.
 Home Page:
