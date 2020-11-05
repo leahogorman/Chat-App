@@ -20,7 +20,7 @@ Registration:
 For the registration section of our app we created a database table that included the users first name, username, password, created-at, and updated-at. The information that    the user logs into the site become an object that is then connected into the database.
 The password includes security meassures and must be at least 8 characters, with upper case and lower case letters, and must include at least one number.
 
-![Login file](docs/img/Login.PNG =250x)
+![Login file](docs/img/Login.PNG)
 
 Login:
 For login the information that the user logged in registration is pulled when the user tries to log in. The username and password are checked against the database and if they are not in the database they are asked to create an account.
@@ -39,13 +39,16 @@ Chatroom:
 The chatroom is connected to our third table. chatlogs. In this table we are logging id, username, message, and created at. Username is a foreign key as it is connected back to the USERS table.
 
 Router Code
+
 ![Router Page](docs/img/Router1.PNG)
 ![Router Page](docs/img/Router2.PNG)
 
 Socket Code
+
 ![Socket](docs/img/Socket.PNG)
 
 ORM Code
+
 ![ORM](docs/img/ORM.PNG)
 
 
