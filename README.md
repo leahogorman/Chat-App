@@ -38,19 +38,6 @@ The Add Room page similar to the Home Page pulls from the ROOM table. When the u
 Chatroom:
 The chatroom is connected to our third table. chatlogs. In this table we are logging id, username, message, and created at. Username is a foreign key as it is connected back to the USERS table.
 
-Router Code
-
-![Router Page](docs/img/Router1.PNG)
-![Router Page](docs/img/Router2.PNG)
-
-Socket Code
-
-![Socket](docs/img/Socket.PNG)
-
-ORM Code
-
-![ORM](docs/img/ORM.PNG)
-
 
 ## **Installation Instructions**
 You can install express, mysql, and body-parser via the terminal or gitbash
